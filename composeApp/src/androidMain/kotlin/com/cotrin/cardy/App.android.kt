@@ -6,38 +6,39 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.ui.Modifier
-import com.cotrin.cardy.theme.AppTheme
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 
 class AndroidApp : Application() {
-    companion object {
-        lateinit var INSTANCE: AndroidApp
-    }
+	companion object {
+		lateinit var INSTANCE: AndroidApp
+	}
 
-    override fun onCreate() {
-        super.onCreate()
-        INSTANCE = this
-    }
+	override fun onCreate() {
+		super.onCreate()
+		INSTANCE = this
+	}
 }
 
 class AppActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            Test()
-        }
-    }
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		setContent {
+			Test()
+		}
+	}
 }
 
 internal actual fun openUrl(url: String?) {
-    val uri = url?.let { Uri.parse(it) } ?: return
-    val intent = Intent().apply {
-        action = Intent.ACTION_VIEW
-        data = uri
-        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-    }
-    AndroidApp.INSTANCE.startActivity(intent)
+	val uri = url?.let { Uri.parse(it) } ?: return
+	val intent = Intent().apply {
+		action = Intent.ACTION_VIEW
+		data = uri
+		addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+	}
+	AndroidApp.INSTANCE.startActivity(intent)
+}
+
+internal actual fun getDispatcher(): CoroutineDispatcher {
+	return Dispatchers.Main
 }
