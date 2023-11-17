@@ -36,9 +36,10 @@ kotlin {
 			implementation(libs.kotlinx.datetime)
 			implementation(libs.multiplatformSettings)
 			implementation(libs.koin.core)
-			implementation(libs.firebase.firestore)
-			implementation(libs.firebase.auth)
 			implementation(libs.moko.mvvm)
+			implementation(libs.ktor.core)
+			implementation(libs.ktor.client.content.negotiation)
+			implementation(libs.ktor.serialization)
 		}
 
 		commonTest.dependencies {
@@ -50,6 +51,7 @@ kotlin {
 			implementation(libs.androidx.activityCompose)
 			implementation(libs.compose.uitooling)
 			implementation(libs.kotlinx.coroutines.android)
+			implementation(libs.ktor.client.okhttp)
 		}
 
 		jvmMain.dependencies {
